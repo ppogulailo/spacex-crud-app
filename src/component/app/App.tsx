@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import Header from "../components/Header";
+import Main from "../components/Main";
+import {Route, Routes} from "react-router-dom";
+import HomePage from "../pages/HomePage";
+import Details from "../pages/Details";
+import NotFound from "../pages/NotFound";
+import { ThemeProvider } from 'styled-components';
 
+const light = {
+    color: 'hsl(200,15%,8%)',
+    background: 'hsl(0,0%,98%)',
+    backgroundShadow: 'rgba(149, 157, 165, 0.2) 0 8px 24px',
+    colorUIBase: 'hsl(0,0%,100%)'
+}
+const dark = {
+    color: 'hsl(0,0%,100%)',
+    background: 'hsl(207,26%,17%)',
+    backgroundShadow: 'rgba(245, 245, 245, 0.2) 0 0 8px',
+    colorUIBase: 'hsl(209,23%,22%)'
+}
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [items, setItems] = useState<any>([]);
+    const [theme, setTheme] = useState<any>('light');
+    const isDarkTheme = theme === 'dark'
+    const handleTheme= ()=>{
+        setTheme(isDarkTheme?'light':'dark')
+    }
+    return (
+        <ThemeProvider theme={isDarkTheme?dark:light}>
+            <Header handleTheme={handleTheme} isDarkTheme={isDarkTheme} />
+            <Main>
+                <Routes>
+                    <Route path='/' element={<HomePage items={items} setItems={setItems}/>}/>
+                    <Route path='/item/:id' element={<Details/>}/>
+                    <Route path='*' element={<NotFound/>}/>
+                </Routes>
+            </Main>
+        </ThemeProvider>
+    );
 }
 
 export default App;
