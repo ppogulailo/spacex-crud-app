@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 import {IoSearch} from "react-icons/io5";
-import {ISearch} from "../../type/types";
+
 import React from "react";
+import {ISearch} from "../../../type/types";
+
 const InputContainer = styled.label`
    background-color: ${props => props.theme.background};
   padding: 1rem 2rem;
@@ -27,12 +29,11 @@ const Input = styled.input.attrs({
     outline: none;
   
 `
-export const Search = ({search, setSearch}:ISearch) => {
+export const Search = ({search,handleDispatch}:ISearch) => {
     return (
         <InputContainer>
             <IoSearch/>
-            <Input value={search} onChange={(e)=>setSearch(e.target.value) }/>
-            {/*<Atan onChange={e=>setSearch(e.target.value)}></Atan>*/}
+            <Input value={search} onChange={(e)=>handleDispatch(e.target.value)}/>
         </InputContainer>
     )
 }

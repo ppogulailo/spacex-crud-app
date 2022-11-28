@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import {IMain} from "../../../type/types";
 
 
 
@@ -20,7 +21,7 @@ const Wrapper=styled.section`
     gap: 4rem;
   }
 `
-const List = ({children}:any) => {
+const List = ({children}:IMain) => {
     return (
         <Wrapper>
             {children}

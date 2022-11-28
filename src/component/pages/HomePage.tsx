@@ -1,77 +1,56 @@
 import React, {useEffect, useState} from 'react';
-import Controls from "../components/Controls";
-import List from "../components/List";
-import Card from "../components/Card";
-import axios from 'axios';
+import Controls from "../components/organism/Controls";
+import List from "../components/atom/List";
+import Card from "../components/molecules/Card";
 import {useNavigate} from "react-router-dom";
-import {ALL_URL_QUERY} from '../../config';
-import {IHomePage, ISpaceXData} from "../../type/types";
+import {AppDispatch, ISpaceXData} from "../../type/types";
+import {useDispatch} from "react-redux";
+import {addLaunches, fetchLaunches} from '../../redux/store/asyncActions/asyncAcrions';
+import {useTypeSelector} from "../../hooks/useTypeSelector";
 
-const HomePage = ({items, setItems}: IHomePage) => {
-    const [filteredItem, setFilteredItem] = useState(items)
-    const [currentPage, setCurrentPage] = useState(1)
-    const [fetching, setFetching] = useState(true)
+const HomePage = () => {
     const navigate = useNavigate()
-
-    const handleSearch = (search: string) => {
-        let data = [...items];
-
-        if (search) {
-            data = data.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
-        }
-        setFilteredItem(data)
-    }
-
+    const dispatch = useDispatch<AppDispatch>()
+    const {items, filtedItems, search, dateStart, dateEnd, error} = useTypeSelector(state => state.reducer)
+    const [fetching, setFetching] = useState(false)
+    let start = dateStart ? dateStart.value : '2006-01-1T00:00:00.000Z';
+    let end = dateEnd ? dateEnd.value : '2022-01-1T00:00:00.000Z'
     useEffect(() => {
-        if (
-            // !items.length &&
-            fetching) {
-            axios.post(ALL_URL_QUERY,
-                {
-                    query: {},
-                    options: {
-                        select: ['name','date_local','details','links',],
-                        pagination: true,
-                        page: currentPage
-                    }
-                }
-            ).then(({data}) => {
-                setItems([...items, ...data.docs])
-                setCurrentPage(prevState => prevState + 1)
-            })
+        if (!items.length) {
+            dispatch(fetchLaunches())
+                .finally(() => setFetching(false))
+        } else if (fetching) {
+            dispatch(addLaunches({search, start, end}))
                 .finally(() => setFetching(false))
         }
-
     }, [fetching]);
+
     useEffect(() => {
         document.addEventListener('scroll', scrollHandler)
         return function () {
             document.removeEventListener('scroll', scrollHandler)
         }
-    }, []);
-    const scrollHandler = (e: any) => {
-        if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
+    }, [])
+
+    const scrollHandler = (): void => {
+        if (document.documentElement.scrollHeight - (document.documentElement.scrollTop + window.innerHeight) < 100) {
             setFetching(true)
         }
     }
-
-    useEffect(() => {
-        handleSearch('');
-    }, [items]);
-
     return (
         <>
-            <Controls onSearch={handleSearch}/>
+            <Controls dateEnd={dateEnd} dateStart={dateStart} search={search}/>
             <List>
+                {error && <>{error}</>}
                 {
-                    filteredItem.map((item: ISpaceXData, index: number) => {
+                    filtedItems?.map((item: ISpaceXData, index: number) => {
                         const cardInfo = {
                             img: item.links.patch.small,
                             name: item.name,
                             info: item.details,
                         }
                         return (
-                            <Card {...cardInfo} key={item.id} onCLick={() => {
+                            <Card {...cardInfo} key={index} onCLick={() => {
                                 navigate(`/item/${item.id}`);
                             }}/>
                         )

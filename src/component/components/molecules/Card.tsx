@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import {ICard} from "../../type/types";
+import {ICard} from "../../../type/types";
 
 
 
@@ -15,7 +15,7 @@ const Wrapper=styled.article`
 const CardImage=styled.img`
     display: block;
     width: 100%;
-    height: 250px;
+    height: 290px;
     object-fit: cover;
     object-position: center;
     box-shadow: ${props => props.theme.backgroundShadow};;

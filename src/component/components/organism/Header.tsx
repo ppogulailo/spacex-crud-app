@@ -1,9 +1,10 @@
 import React from 'react';
 import {useState} from "react";
-import {Container} from './Container'
+import {Container} from '../atom/Container'
 import {IoMoonOutline,IoMoon} from 'react-icons/io5'
 import styled from "styled-components";
 import {Link} from 'react-router-dom'
+import {IHeaderProps} from "../../../type/types";
 
 const HeaderEl = styled.header`
   box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
@@ -29,7 +30,7 @@ const ThemeSwitcher = styled.div`
   cursor: pointer;
   text-transform: capitalize;
 `
-const Header = ({handleTheme, isDarkTheme}: any) => {
+const Header = ({handleTheme, isDarkTheme}: IHeaderProps) => {
     const [toggle, setToggle] = useState(isDarkTheme)
 
     const toggleChange = () => {

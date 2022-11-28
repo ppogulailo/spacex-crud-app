@@ -8,7 +8,6 @@ export const Container=styled.div`
     padding: 0 2rem;
 `;
 
-
 // const Container = () => {
 //     return (
 //         <div>
@@ -18,3 +17,5 @@ export const Container=styled.div`
 // };
 //
 // export default Container;
+
+

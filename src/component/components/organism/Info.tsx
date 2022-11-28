@@ -1,8 +1,8 @@
 import React from 'react';
 import YouTube from 'react-youtube';
 import styled from "styled-components";
-import Iframe from "react-iframe";
-import {ISpaceXData} from "../../type/types";
+
+import {IInfo, ISpaceXData} from "../../../type/types";
 
 
 const Wrapper = styled.section`
@@ -11,6 +11,7 @@ const Wrapper = styled.section`
   display: grid;
   grid-template-columns: 100%;
   gap: 2rem;
+  color: ${props => props.theme.color};
 
   @media (min-width: 767px) {
     grid-template-columns: minmax(100px, 400px) 1fr;
@@ -56,15 +57,14 @@ const ListItem = styled.li`
     font-weight: var(--fw-normal);
   }
 `
-const Info = ({props}:any) => {
-    console.log(props)
+const Info: React.FC<IInfo> = ({item}) => {
     const {
         name,
         date_local,
         details,
         links,
         success,
-    } = props
+    } = item
     const date = new Date(date_local).toLocaleDateString();
     return (
         <Wrapper>
@@ -89,11 +89,11 @@ const Info = ({props}:any) => {
                         </ListItem>
                     </List>
                 </ListGroup>
-                    <YouTube
-                        opts={{playerVars: {autoplay: true}}}
-                        videoId={links.youtube_id}
-                        allow-presentation
-                    />
+                <YouTube
+                    opts={{playerVars: {autoplay: true}}}
+                    videoId={links.youtube_id}
+                    allow-presentation
+                />
             </div>
         </Wrapper>
     );

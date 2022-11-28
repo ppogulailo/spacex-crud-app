@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import styled from "styled-components";
 import {Container} from "./Container";
+import {IMain} from "../../../type/types";
 
 const Wrapper = styled.main`
     padding: 2rem 0;
@@ -10,7 +11,7 @@ const Wrapper = styled.main`
     }
 `
 
-const Main = ({children}:any) => {
+const Main = ({children}:IMain) => {
     return (
         <Wrapper>
             <Container>{children}</Container>
