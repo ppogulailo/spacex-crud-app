@@ -1,10 +1,8 @@
 import React from 'react';
-import styled from "styled-components";
-import {IMain} from "../../../type/types";
+import styled from 'styled-components';
+import { IMain } from '../../../type/types';
 
-
-
-const Wrapper=styled.section`
+const Wrapper = styled.section`
     width: 100%;
     padding: 2rem 0;
 
@@ -20,13 +18,11 @@ const Wrapper=styled.section`
     grid-template-columns: repeat(4,1fr);
     gap: 4rem;
   }
-`
-const List = ({children}:IMain) => {
-    return (
+`;
+const List = ({ children }: IMain) => (
         <Wrapper>
             {children}
         </Wrapper>
-    );
-};
+);
 
 export default List;
