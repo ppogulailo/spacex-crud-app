@@ -13,7 +13,7 @@ import {
 import { ButtonChange } from '../atom/Button';
 
 const Wrapper = styled.div`
-  display: flex;
+  display: flex;                                                                    
   flex-direction: column;
  
 

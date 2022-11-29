@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   padding: 2rem 0;
 `;
 const Title = styled(Link).attrs({
-  to: '/',
+  to: '/SpaceXAPI/',
 })`
   color: ${(props) => props.theme.color};
   font-size: var(--fs-sm);
