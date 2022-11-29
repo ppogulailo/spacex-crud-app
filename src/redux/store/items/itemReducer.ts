@@ -22,7 +22,7 @@ const initialState: ItemState = {
   dateEnd: null,
   isLoading: false,
   filtedItems: [],
-  offset: 10,
+  offset: 0,
   hasNextPage: true,
   error: null,
 };
@@ -51,22 +51,23 @@ const itemSlice = createSlice({
           state.items = [...state.items, ...action.payload.docs];
         }
         state.filtedItems = state.items;
+        state.offset = action.payload.offset + 10;
       })
       .addCase(filterLaunches.fulfilled, (state, action) => {
         if (action.payload) {
           state.filtedItems = action.payload.docs;
           state.hasNextPage = action.payload.hasNextPage;
+          state.offset = action.payload.offset + state.items.length;
         }
       })
       .addCase(addLaunches.fulfilled, (state, action) => {
         if (action.payload.docs[0]) {
-          state.offset += 5;
+          state.offset = action.payload.offset + 5;
         }
         state.items = [...state.filtedItems, ...action.payload.docs];
         state.hasNextPage = action.payload.hasNextPage;
         state.filtedItems = state.items;
       })
-
       .addMatcher(isError, (state, action) => {
         state.error = action.error.message;
         state.isLoading = false;

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { SingleValue } from 'react-select';
 import { useForm } from 'react-hook-form';
 import React from 'react';
 import { Search } from '../atom/Search';
@@ -55,12 +54,6 @@ const Controls = ({ dateStart, dateEnd, search }: IControl) => {
   const handleFilter = () => {
     void dispatch(filterLaunches({ search, start, end }));
   };
-
-  const handleSelectionChange = (
-    arg: SingleValue<Option>,
-  ) => {
-    dispatch(changeDataStart(arg as Option));
-  };
   const { register, handleSubmit, formState: { errors } } = useForm<ISearchForm>({
     mode: 'onChange',
   });
@@ -75,7 +68,7 @@ const Controls = ({ dateStart, dateEnd, search }: IControl) => {
                 options={options}
                 isClearable
                 value={dateStart}
-                onChange={(arg) => handleSelectionChange(arg as Option)}
+                onChange={(arg) => dispatch(changeDataStart(arg as Option))}
                 isSearchable={false}
                 placeholder='Select start'
             />

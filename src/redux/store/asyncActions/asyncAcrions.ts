@@ -106,7 +106,7 @@ IFilterLaunches, { rejectValue: string, state: { reducer: ItemState } }>(
       if (response.status === 200) {
         return response.data;
       }
-    } else if (offset && hasNextPage) {
+    } else if (hasNextPage) {
       const response = await axios.post(
         ALL_URL_QUERY,
         {

@@ -12,10 +12,9 @@ const InputContainer = styled.label`
 
   border-radius: var(--raddi);
   box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
-  width: 100%;
   @media (min-width: 767px) {
     margin-bottom: 0;
-    width: 280px;
+    width: 230px;
   }
 `;
 const Input = styled.input.attrs({

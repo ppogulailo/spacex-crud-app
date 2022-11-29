@@ -30,12 +30,6 @@ const ThemeSwitcher = styled.div`
   text-transform: capitalize;
 `;
 const Header = ({ handleTheme, isDarkTheme }: IHeaderProps) => {
-  const [, setToggle] = useState(isDarkTheme);
-
-  const toggleChange = () => {
-    setToggle(!isDarkTheme);
-    handleTheme();
-  };
   return (
         <HeaderEl>
             <Container>
@@ -43,10 +37,10 @@ const Header = ({ handleTheme, isDarkTheme }: IHeaderProps) => {
                     <Title>
                         Pinterest
                     </Title>
-                    <ThemeSwitcher onClick={toggleChange}>
+                    <ThemeSwitcher onClick={handleTheme}>
                         {isDarkTheme
-                          ? <><IoMoon/><span style={{ marginLeft: '0.75rem' }}>Dark Theme</span></>
-                          : <><IoMoonOutline/><span style={{ marginLeft: '0.75rem' }}>Light Theme</span></>
+                          ? <><IoMoon/><span>Dark Theme</span></>
+                          : <><IoMoonOutline/><span >Light Theme</span></>
                         }
                     </ThemeSwitcher>
                 </Wrapper>

@@ -32,18 +32,19 @@ const HomePage = () => {
       setFetching(true);
     }
   };
+
   // Also I will add function to save your current position on page and save it
   useEffect(() => {
     document.addEventListener('scroll', scrollHandler);
     return function () {
       document.removeEventListener('scroll', scrollHandler);
+      console.log('ggg');
     };
   }, []);
   return (
         <>
             <Controls dateEnd={dateEnd} dateStart={dateStart} search={search}/>
             <List>
-                {(error != null) && <>{error}</>}
                 {
                     filtedItems?.map((item: ISpaceXData, index: number) => {
                       const cardInfo = {
@@ -58,6 +59,7 @@ const HomePage = () => {
                       );
                     })
                 }
+              {(error != null) && <>{error}</>}
             </List>
         </>
   );

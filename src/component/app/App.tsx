@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import { useDispatch } from 'react-redux';
 import Header from '../components/organism/Header';
 import Main from '../components/atom/Main';
 import HomePage from '../pages/HomePage';
 import Details from '../pages/Details';
 import NotFound from '../pages/NotFound';
+import { useTypeSelector } from '../../hooks/useTypeSelector';
+import { changeTheme } from '../../redux/store/items/themeReducer';
 
 const light = {
   color: 'hsl(200,15%,8%)',
@@ -23,11 +26,11 @@ const dark = {
 };
 
 function App() {
-  // Will correct to redux
-  const [theme, setTheme] = useState('light');
-  const isDarkTheme = theme === 'dark';
+  const dispatch = useDispatch();
+  const { themes } = useTypeSelector((state) => state.theme);
+  const isDarkTheme = themes === 'dark';
   const handleTheme = () => {
-    setTheme(isDarkTheme ? 'light' : 'dark');
+    dispatch(changeTheme(isDarkTheme ? 'light' : 'dark'));
   };
   return (
         <ThemeProvider theme={isDarkTheme ? dark : light}>
