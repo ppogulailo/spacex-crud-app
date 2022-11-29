@@ -34,7 +34,7 @@ function App() {
             <Header handleTheme={handleTheme} isDarkTheme={isDarkTheme}/>
             <Main>
                 <Routes>
-                    <Route path='/SpaceXAPI/' element={<HomePage/>}/>
+                    <Route path='/' element={<HomePage/>}/>
                     <Route path='/item/:id' element={<Details/>}/>
                     <Route path='*' element={<NotFound/>}/>
                 </Routes> </Main>
