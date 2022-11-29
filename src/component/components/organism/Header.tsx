@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IoMoonOutline, IoMoon } from 'react-icons/io5';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -29,8 +29,7 @@ const ThemeSwitcher = styled.div`
   cursor: pointer;
   text-transform: capitalize;
 `;
-const Header = ({ handleTheme, isDarkTheme }: IHeaderProps) => {
-  return (
+const Header = ({ handleTheme, isDarkTheme }: IHeaderProps) => (
         <HeaderEl>
             <Container>
                 <Wrapper>
@@ -39,14 +38,13 @@ const Header = ({ handleTheme, isDarkTheme }: IHeaderProps) => {
                     </Title>
                     <ThemeSwitcher onClick={handleTheme}>
                         {isDarkTheme
-                          ? <><IoMoon/><span>Dark Theme</span></>
-                          : <><IoMoonOutline/><span >Light Theme</span></>
+                          ? <><IoMoon/><span style={{ marginLeft: '1rem' }}>Dark Theme</span></>
+                          : <><IoMoonOutline/><span style={{ marginLeft: '1rem' }}>Light Theme</span></>
                         }
                     </ThemeSwitcher>
                 </Wrapper>
             </Container>
         </HeaderEl>
-  );
-};
+);
 
 export default Header;

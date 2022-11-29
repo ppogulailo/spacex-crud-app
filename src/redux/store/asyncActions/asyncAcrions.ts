@@ -99,7 +99,7 @@ IFilterLaunches, { rejectValue: string, state: { reducer: ItemState } }>(
           options: {
             select: ['date_utc', 'details', 'links', 'name', 'success'],
             offset: `${offset}`,
-            limit: 5,
+            limit: 15,
           },
         },
       );
@@ -119,7 +119,7 @@ IFilterLaunches, { rejectValue: string, state: { reducer: ItemState } }>(
           options: {
             select: ['date_utc', 'details', 'links', 'name', 'success'],
             offset: `${offset}`,
-            limit: 5,
+            limit: 15,
           },
         },
       );

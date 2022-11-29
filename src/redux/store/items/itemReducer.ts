@@ -62,7 +62,7 @@ const itemSlice = createSlice({
       })
       .addCase(addLaunches.fulfilled, (state, action) => {
         if (action.payload.docs[0]) {
-          state.offset = action.payload.offset + 5;
+          state.offset = action.payload.offset + 15;
         }
         state.items = [...state.filtedItems, ...action.payload.docs];
         state.hasNextPage = action.payload.hasNextPage;
