@@ -38,7 +38,6 @@ const HomePage = () => {
     document.addEventListener('scroll', scrollHandler);
     return function () {
       document.removeEventListener('scroll', scrollHandler);
-      console.log('ggg');
     };
   }, []);
   return (

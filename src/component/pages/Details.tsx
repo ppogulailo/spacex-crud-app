@@ -23,7 +23,7 @@ const Details = () => {
   return (
         <>
             {isLoading ? <>Loading...</> : <>
-                <Button onClick={() => navigation('/')}><IoArrowBack/>Button</Button>
+                <Button onClick={() => navigation('/SpaceXAPI/')}><IoArrowBack/>Button</Button>
                 {item && <Info item={item}/>}
             </>
             }
