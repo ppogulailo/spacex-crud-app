@@ -15,7 +15,7 @@ undefined, { rejectValue: string }>(
       {
         query: {},
         options: {
-          select: '',
+          select: ['date_utc', 'details', 'links', 'name', 'success'],
           pagination: true,
           limit: 10,
         },
@@ -46,7 +46,7 @@ IFilterLaunches, { rejectValue: string }>(
             },
           },
           options: {
-            select: '',
+            select: ['date_utc', 'details', 'links', 'name', 'success'],
             pagination: true,
           },
         },
@@ -65,7 +65,7 @@ IFilterLaunches, { rejectValue: string }>(
             },
           },
           options: {
-            select: '',
+            select: ['date_utc', 'details', 'links', 'name', 'success'],
             pagination: true,
           },
         },
@@ -97,6 +97,7 @@ IFilterLaunches, { rejectValue: string, state: { reducer: ItemState } }>(
             },
           },
           options: {
+            select: ['date_utc', 'details', 'links', 'name', 'success'],
             offset: `${offset}`,
             limit: 5,
           },
@@ -116,6 +117,7 @@ IFilterLaunches, { rejectValue: string, state: { reducer: ItemState } }>(
             },
           },
           options: {
+            select: ['date_utc', 'details', 'links', 'name', 'success'],
             offset: `${offset}`,
             limit: 5,
           },

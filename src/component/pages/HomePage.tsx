@@ -39,7 +39,6 @@ const HomePage = () => {
       document.removeEventListener('scroll', scrollHandler);
     };
   }, []);
-
   return (
         <>
             <Controls dateEnd={dateEnd} dateStart={dateStart} search={search}/>

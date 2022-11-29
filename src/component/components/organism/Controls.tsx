@@ -79,7 +79,7 @@ const Controls = ({ dateStart, dateEnd, search }: IControl) => {
                 options={options}
                 isClearable
                 value={dateEnd}
-                onChange={(arg: any) => dispatch(changeDataEnd(arg))}
+                onChange={(arg) => dispatch(changeDataEnd(arg as Option))}
                 isSearchable={false}
                 placeholder='Select end'
             />
