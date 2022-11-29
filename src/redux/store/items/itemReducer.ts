@@ -69,6 +69,7 @@ const itemSlice = createSlice({
 
       .addMatcher(isError, (state, action) => {
         state.error = action.error.message;
+        state.isLoading = false;
       })
       .addMatcher(isPendingAction, (state) => {
         state.error = null;

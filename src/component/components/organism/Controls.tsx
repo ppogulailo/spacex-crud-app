@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { SingleValue } from 'react-select';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import React from 'react';
 import { Search } from '../atom/Search';
 import { CustomSelect } from '../atom/CustomSelect';
@@ -13,8 +13,9 @@ import {
 import { ButtonChange } from '../atom/Button';
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 3fr 1fr 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+ 
 
   @media (min-width: 767px) {
     flex-direction: row;
@@ -24,8 +25,8 @@ const Wrapper = styled.div`
 `;
 const ErrorMessage = styled.div`
   padding: 1rem 3rem;
-  color:  ${(props) => props.theme.errorColor};
-  font-weight:var(--fw-normal) ;
+  color: ${(props) => props.theme.errorColor};
+  font-weight: var(--fw-normal);
 `;
 const options = [
   { value: '2006-01-1T00:00:00.000Z', label: '2006' },
@@ -51,7 +52,7 @@ const Controls = ({ dateStart, dateEnd, search }: IControl) => {
   const dispatch = useDispatch<AppDispatch>();
   const start = (dateStart != null) ? dateStart.value : '2006-01-1T00:00:00.000Z';
   const end = (dateEnd != null) ? dateEnd.value : '2022-01-1T00:00:00.000Z';
-  const handleFilter: SubmitHandler<ISearchForm> = () => {
+  const handleFilter = () => {
     void dispatch(filterLaunches({ search, start, end }));
   };
 
@@ -67,6 +68,9 @@ const Controls = ({ dateStart, dateEnd, search }: IControl) => {
         <Wrapper>
             <Search register={register} search={search}
                     handleDispatch={(arg) => dispatch(changeSearch(arg))}/>
+            <ErrorMessage>{errors?.search && <>{errors?.search?.message}</>}</ErrorMessage>
+            {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+            <ButtonChange onClick={handleSubmit(handleFilter)}>Search filter</ButtonChange>
             <CustomSelect
                 options={options}
                 isClearable
@@ -83,9 +87,7 @@ const Controls = ({ dateStart, dateEnd, search }: IControl) => {
                 isSearchable={false}
                 placeholder='Select end'
             />
-          {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-            <ButtonChange onClick={ handleSubmit(handleFilter) }>Filter</ButtonChange>
-          <ErrorMessage>{errors?.search && <>{errors?.search?.message}</>}</ErrorMessage>
+            <ButtonChange onClick={handleFilter}>Date filter</ButtonChange>
         </Wrapper>
   );
 };
