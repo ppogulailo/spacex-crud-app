@@ -42,7 +42,11 @@ const HomePage = () => {
   }, []);
   return (
         <>
-            <Controls dateEnd={dateEnd} dateStart={dateStart} search={search}/>
+            <Controls dateEnd={dateEnd}
+                      dateStart={dateStart}
+                      search={search}
+                      setFetching={setFetching}
+            />
             <List>
                 {
                     filtedItems?.map((item: ISpaceXData, index: number) => {
@@ -58,7 +62,7 @@ const HomePage = () => {
                       );
                     })
                 }
-              {(error != null) && <>{error}</>}
+              {(error != null) && <>{error === 'Rejected' ? 'This all items on this date' : error}</>}
             </List>
         </>
   );

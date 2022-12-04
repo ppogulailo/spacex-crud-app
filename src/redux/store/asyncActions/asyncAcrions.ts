@@ -37,13 +37,11 @@ IFilterLaunches, { rejectValue: string }>(
         ALL_URL_QUERY,
         {
           query: {
-            $text: {
-              $search: `${search}`,
-            },
             date_utc: {
               $gte: `${start}`,
               $lte: `${end}`,
             },
+            name: `${search}`,
           },
           options: {
             select: ['date_utc', 'details', 'links', 'name', 'success'],

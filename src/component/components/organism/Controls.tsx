@@ -47,12 +47,14 @@ const options = [
   { value: '2022-01-1T00:00:00.000Z', label: '2022' },
 ];
 
-const Controls = ({ dateStart, dateEnd, search }: IControl) => {
+const Controls = ({
+  dateStart, dateEnd, search, setFetching,
+}: IControl) => {
   const dispatch = useDispatch<AppDispatch>();
   const start = (dateStart != null) ? dateStart.value : '2006-01-1T00:00:00.000Z';
   const end = (dateEnd != null) ? dateEnd.value : '2022-01-1T00:00:00.000Z';
   const handleFilter = () => {
-    void dispatch(filterLaunches({ search, start, end }));
+    dispatch(filterLaunches({ search, start, end })).finally(() => setFetching(false));
   };
   const { register, handleSubmit, formState: { errors } } = useForm<ISearchForm>({
     mode: 'onChange',

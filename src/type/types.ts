@@ -52,6 +52,7 @@ export interface IControl {
     value: string
     label: string
   } | null
+  setFetching: (a: boolean) => void
 }
 
 export interface IHeaderProps {
